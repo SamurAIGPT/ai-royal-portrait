@@ -13,15 +13,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -40,10 +39,10 @@ model User {
   email                 String?                 @unique
   emailVerified         DateTime?
   image                 String?
-  credits               Int                     @default(100)
+  credits               Int                     @default(0)
   accounts              Account[]
   sessions              Session[]
-  royalPortraitCreations RoyalPortraitCreation[]
+  RoyalPortraitCreation RoyalPortraitCreation[]
 }
 
 model VerificationToken {
@@ -57,14 +56,14 @@ model VerificationToken {
 model RoyalPortraitCreation {
   id          String   @id @default(cuid())
   userId      String
-  inputImage  String   @db.Text
-  resultImage String?  @db.Text
+  inputImage  String
+  resultImage String?
   styleName   String
   aspectRatio String   @default("auto")
   status      String   @default("processing")
   requestId   String?  @unique
-  error       String?  @db.Text
+  error       String?
   creditCost  Int      @default(2)
   createdAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

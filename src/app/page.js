@@ -243,66 +243,7 @@ export default function WorkspacePage() {
   const canGenerate =
     imageUrl && !uploading && selectedStyle && !generating && (session?.user?.credits ?? 0) >= creditCost;
 
-  // Not signed in
-  if (authStatus === "unauthenticated") {
-    return (
-      <div className="min-h-screen bg-zinc-950 flex flex-col">
-        <Navbar />
-        {/* Hero */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 py-16 text-center">
-          <div className="animate-float mb-6">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-700 flex items-center justify-center shadow-2xl glow-gold mx-auto">
-              <FaCrown className="text-3xl text-zinc-950" />
-            </div>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight">
-            Transform Your Photo<br />
-            <span className="text-gradient-gold">Into Royalty</span>
-          </h1>
-          <p className="text-zinc-400 text-base max-w-md mb-8 leading-relaxed">
-            Upload a portrait photo and apply stunning AI styles — royal hair, makeup, outfits, accessories and cinematic lighting.
-          </p>
-
-          {/* Example grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-10 max-w-lg">
-            {EXAMPLE_IMAGES.map((url, i) => (
-              <div key={i} className="aspect-square rounded-xl overflow-hidden border border-zinc-800 hover:border-yellow-500/40 transition-all">
-                <img src={url} alt={`Example ${i + 1}`} className="w-full h-full object-cover" />
-              </div>
-            ))}
-          </div>
-
-          <button
-            id="hero-signin-btn"
-            onClick={() => signIn("google")}
-            className="flex items-center gap-3 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-zinc-950 font-bold text-base shadow-xl hover:shadow-yellow-500/30 transition-all hover:scale-105 active:scale-95"
-          >
-            <FaGoogle />
-            Continue with Google — It&apos;s Free
-          </button>
-          <p className="text-zinc-600 text-xs mt-4">
-            New users get <span className="text-yellow-400 font-semibold">100 free credits</span> (50 portraits)
-          </p>
-
-          {/* Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-14 max-w-2xl w-full">
-            {[
-              { icon: "🎨", title: "20 Unique Styles", desc: "Hair, makeup, accessories, outfits & cinematic lighting" },
-              { icon: "⚡", title: "Instant Results", desc: "AI generates your royal portrait in seconds" },
-              { icon: "👑", title: "Just 2 Credits", desc: "Each portrait costs only 2 credits ($0.01)" },
-            ].map((f) => (
-              <div key={f.title} className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 text-center">
-                <div className="text-2xl mb-2">{f.icon}</div>
-                <h3 className="text-sm font-semibold text-zinc-200 mb-1">{f.title}</h3>
-                <p className="text-xs text-zinc-500">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </main>
-      </div>
-    );
-  }
-
+  
   return (
     <div className="min-h-screen bg-zinc-950 flex flex-col">
       <Navbar />
@@ -311,7 +252,7 @@ export default function WorkspacePage() {
         <div className="w-full md:w-[400px] shrink-0 flex flex-col gap-4 md:overflow-y-auto overflow-visible pb-4">
 
           {/* Upload Card */}
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4">
+          <div className="rounded bg-zinc-900 border border-zinc-800 p-4">
             <h2 className="text-sm font-semibold text-zinc-300 mb-3 flex items-center gap-2">
               <FaUpload className="text-yellow-500 text-xs" />
               Upload Your Portrait
@@ -319,7 +260,7 @@ export default function WorkspacePage() {
             <div
               id="upload-zone"
               onClick={() => !uploading && !generating && fileInputRef.current?.click()}
-              className={`relative h-52 rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-all overflow-hidden group ${
+              className={`relative h-52 rounded border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-all overflow-hidden group ${
                 imageUrl
                   ? "border-yellow-500/30 bg-zinc-950/40"
                   : "border-zinc-700 bg-zinc-950/30 hover:border-yellow-500/40 hover:bg-zinc-950/50"
@@ -345,14 +286,14 @@ export default function WorkspacePage() {
                       setCurrentCreation(null);
                       setError("");
                     }}
-                    className="absolute top-2 right-2 p-1.5 bg-black/70 hover:bg-red-600 text-white rounded-lg text-xs transition-all"
+                    className="absolute top-2 right-2 p-1.5 bg-black/70 hover:bg-red-600 text-white rounded text-xs transition-all"
                   >
                     <FaTrash />
                   </button>
                 </>
               ) : (
                 <div className="flex flex-col items-center gap-3 p-4 text-center">
-                  <div className="w-12 h-12 rounded-xl bg-zinc-800 group-hover:bg-yellow-500/10 flex items-center justify-center transition-all">
+                  <div className="w-12 h-12 rounded bg-zinc-800 group-hover:bg-yellow-500/10 flex items-center justify-center transition-all">
                     <FaUpload className="text-zinc-500 group-hover:text-yellow-500 text-lg transition-colors" />
                   </div>
                   <div>
@@ -374,7 +315,7 @@ export default function WorkspacePage() {
           </div>
 
           {/* Style Selector */}
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4">
+          <div className="rounded bg-zinc-900 border border-zinc-800 p-4">
             <h2 className="text-sm font-semibold text-zinc-300 mb-3 flex items-center gap-2">
               <FaMagic className="text-yellow-500 text-xs" />
               Choose Your Style
@@ -392,7 +333,7 @@ export default function WorkspacePage() {
                           key={style.name}
                           id={`style-${style.name.replace(/\s+/g, "-").toLowerCase()}`}
                           onClick={() => setSelectedStyle(style)}
-                          className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-medium transition-all border ${
+                          className={`flex items-center gap-1 px-2.5 py-1.5 rounded text-xs font-medium transition-all border ${
                             isSelected
                               ? "bg-yellow-500/15 border-yellow-500/40 text-yellow-300 shadow-lg shadow-yellow-500/5"
                               : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600"
@@ -410,18 +351,18 @@ export default function WorkspacePage() {
           </div>
 
           {/* Aspect Ratio */}
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4 relative">
+          <div className="rounded bg-zinc-900 border border-zinc-800 p-4 relative">
             <h2 className="text-sm font-semibold text-zinc-300 mb-3">Aspect Ratio</h2>
             <button
               id="aspect-ratio-dropdown-btn"
               onClick={() => setArDropOpen((p) => !p)}
-              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-zinc-800 border border-zinc-700 hover:border-zinc-600 text-sm text-zinc-300 transition-all"
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded bg-zinc-800 border border-zinc-700 hover:border-zinc-600 text-sm text-zinc-300 transition-all"
             >
               <span>{ASPECT_RATIOS.find((a) => a.value === aspectRatio)?.label}</span>
               {arDropOpen ? <FaChevronUp className="text-zinc-500 text-xs" /> : <FaChevronDown className="text-zinc-500 text-xs" />}
             </button>
             {arDropOpen && (
-              <div className="absolute bottom-full left-4 right-4 mb-1 bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl z-50 overflow-hidden overscroll-contain">
+              <div className="absolute bottom-16 left-4 right-4 bg-zinc-900 border border-zinc-700 rounded shadow-2xl z-50 overflow-hidden overscroll-contain">
                 {ASPECT_RATIOS.map((ar) => (
                   <button
                     key={ar.value}
@@ -438,7 +379,7 @@ export default function WorkspacePage() {
           </div>
 
           {/* Generate Button */}
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4">
+          <div className="rounded bg-zinc-900 border border-zinc-800 p-4">
             {/* Cost info */}
             <div className="flex items-center justify-between text-xs text-zinc-500 mb-3">
               <span>Cost per portrait</span>
@@ -452,7 +393,7 @@ export default function WorkspacePage() {
             </div>
 
             {error && (
-              <div className="mb-3 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs flex items-start gap-2">
+              <div className="mb-3 p-3 rounded bg-red-500/10 border border-red-500/20 text-red-400 text-xs flex items-start gap-2">
                 <FaExclamationCircle className="mt-0.5 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -462,7 +403,7 @@ export default function WorkspacePage() {
               id="generate-portrait-btn"
               onClick={handleGenerate}
               disabled={!canGenerate}
-              className={`w-full py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 ${
+              className={`w-full py-3 rounded font-bold text-sm transition-all flex items-center justify-center gap-2 ${
                 canGenerate
                   ? "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-zinc-950 shadow-lg hover:shadow-yellow-500/25 hover:scale-[1.01] active:scale-[0.99]"
                   : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
@@ -487,7 +428,7 @@ export default function WorkspacePage() {
         <div className="flex-1 flex flex-col gap-4 md:overflow-hidden overflow-visible">
 
           {/* Current Result */}
-          <div className="flex-1 rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden flex flex-col min-h-[400px]">
+          <div className="flex-1 rounded bg-zinc-900 border border-zinc-800 overflow-hidden flex flex-col min-h-[400px]">
             {currentCreation ? (
               <div className="flex flex-col h-full">
                 {/* Header */}
@@ -504,10 +445,10 @@ export default function WorkspacePage() {
                   {currentCreation.status === "processing" && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                       <div className="relative">
-                        <div className="w-16 h-16 rounded-2xl bg-zinc-800 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded bg-zinc-800 flex items-center justify-center">
                           <FaCrown className="text-yellow-500 text-2xl animate-pulse" />
                         </div>
-                        <div className="absolute -inset-1 rounded-2xl border-2 border-yellow-500/30 animate-ping" />
+                        <div className="absolute -inset-1 rounded border-2 border-yellow-500/30 animate-ping" />
                       </div>
                       <div>
                         <p className="text-sm text-zinc-300 font-semibold text-center">Creating your royal portrait…</p>
@@ -528,8 +469,8 @@ export default function WorkspacePage() {
                         className="w-full h-full object-contain animate-slide-up"
                       />
                       {/* Overlay with original */}
-                      <div className="absolute bottom-3 left-3 p-2 rounded-xl bg-black/70 backdrop-blur-sm border border-zinc-700 flex items-center gap-2">
-                        {imageUrl && <img src={imageUrl} alt="Original" className="w-10 h-10 rounded-lg object-cover border border-zinc-600" />}
+                      <div className="absolute bottom-3 left-3 p-2 rounded bg-black/70 backdrop-blur-sm border border-zinc-700 flex items-center gap-2">
+                        {imageUrl && <img src={imageUrl} alt="Original" className="w-10 h-10 rounded object-cover border border-zinc-600" />}
                         <div>
                           <p className="text-[10px] text-zinc-400">Original</p>
                           <p className="text-[10px] text-yellow-400 font-semibold">→ {currentCreation.styleName}</p>
@@ -539,7 +480,7 @@ export default function WorkspacePage() {
                       <button
                         id="download-result-btn"
                         onClick={() => handleDownload(currentCreation.resultImage)}
-                        className="absolute top-3 right-3 p-2.5 rounded-xl bg-black/70 hover:bg-yellow-500 text-white hover:text-zinc-950 backdrop-blur-sm transition-all border border-zinc-700 hover:border-yellow-500 opacity-0 group-hover:opacity-100"
+                        className="absolute top-3 right-3 p-2.5 rounded bg-black/70 hover:bg-yellow-500 text-white hover:text-zinc-950 backdrop-blur-sm transition-all border border-zinc-700 hover:border-yellow-500 opacity-0 group-hover:opacity-100"
                       >
                         <FaDownload className="text-sm" />
                       </button>
@@ -557,7 +498,7 @@ export default function WorkspacePage() {
             ) : (
               /* Placeholder */
               <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-                <div className="w-20 h-20 rounded-2xl bg-zinc-800 flex items-center justify-center mb-4 animate-float">
+                <div className="w-20 h-20 rounded bg-zinc-800 flex items-center justify-center mb-4 animate-float">
                   <FaCrown className="text-4xl text-zinc-700" />
                 </div>
                 <p className="text-sm font-semibold text-zinc-500">Your royal portrait will appear here</p>
@@ -566,7 +507,7 @@ export default function WorkspacePage() {
                 {/* Example grid */}
                 <div className="grid grid-cols-3 gap-2 mt-6 w-full max-w-xs">
                   {EXAMPLE_IMAGES.slice(0, 6).map((url, i) => (
-                    <div key={i} className="aspect-square rounded-xl overflow-hidden border border-zinc-800 hover:border-yellow-500/30 transition-all">
+                    <div key={i} className="aspect-square rounded overflow-hidden border border-zinc-800 hover:border-yellow-500/30 transition-all">
                       <img src={url} alt={`Example ${i + 1}`} className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-all" />
                     </div>
                   ))}
@@ -578,7 +519,7 @@ export default function WorkspacePage() {
 
           {/* Recent Creations */}
           {recentCreations.length > 0 && (
-            <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4">
+            <div className="rounded bg-zinc-900 border border-zinc-800 p-4">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-sm font-semibold text-zinc-300 flex items-center gap-2">
                   <FaImages className="text-yellow-500 text-xs" />
@@ -592,7 +533,7 @@ export default function WorkspacePage() {
                 {recentCreations.map((c) => (
                   <div
                     key={c.id}
-                    className="aspect-square rounded-xl overflow-hidden border border-zinc-800 relative group hover:border-yellow-500/30 transition-all cursor-pointer"
+                    className="aspect-square rounded overflow-hidden border border-zinc-800 relative group hover:border-yellow-500/30 transition-all cursor-pointer"
                     onClick={() => c.status === "completed" && c.resultImage && setCurrentCreation(c)}
                   >
                     {c.status === "processing" && (
@@ -604,7 +545,7 @@ export default function WorkspacePage() {
                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
                           <button
                             onClick={(e) => { e.stopPropagation(); handleDownload(c.resultImage, `${c.styleName}.jpg`); }}
-                            className="p-1.5 rounded-lg bg-yellow-500 text-zinc-950"
+                            className="p-1.5 rounded bg-yellow-500 text-zinc-950"
                           >
                             <FaDownload className="text-xs" />
                           </button>

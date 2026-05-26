@@ -4,7 +4,7 @@ Transform your selfie into stunning royal and artistic portrait styles using AI.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/SamurAIGPT/ai-royal-portrait)
 
-![AI Royal Portrait Preview](https://cdn.muapi.ai/outputs/64ba772a57304aca9e821983e0b34f20.jpg)
+![AI Royal Portrait UI](https://cdn.muapi.ai/data/2/358897692279/Screenshot_2026-05-26_170614.png)
 
 ## ✨ Features
 
