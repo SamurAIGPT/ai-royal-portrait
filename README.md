@@ -2,6 +2,12 @@
 
 Transform your selfie into stunning royal and artistic portrait styles using AI. Powered by MuAPI's `portrait-stylist` model with 20 unique transformation effects.
 
+## 🌐 Project Details
+
+**GitHub Repository:** [github.com/SamurAIGPT/ai-royal-portrait](https://github.com/SamurAIGPT/ai-royal-portrait)
+
+**Live Demo Preview:** [ai-royal-portrait.vercel.app](https://ai-royal-portrait.vercel.app/)
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/SamurAIGPT/ai-royal-portrait)
 
 ![AI Royal Portrait UI](https://cdn.muapi.ai/data/2/358897692279/Screenshot_2026-05-26_170614.png)
