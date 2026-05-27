@@ -1,6 +1,9 @@
-# AI Royal Portrait Generator
+# 👑 Royal Portrait AI — Open-Source AI Portrait Style Transformer SaaS (Free Lensa AI / Portrait AI Alternative)
 
-Transform your selfie into stunning royal and artistic portrait styles using AI. Powered by MuAPI's `portrait-stylist` model with 20 unique transformation effects.
+> **Transform any selfie into 20 unique royal, cinematic, and artistic portrait styles in seconds.** A production-ready, self-hostable Next.js SaaS boilerplate with HD downloads, a personal gallery dashboard, and built-in Stripe billing. A free open-source alternative to Lensa AI, Portrait AI, PicsArt AI, and Facetune — powered by the MuAPI AI engine.
+
+**Tech stack:** Next.js 14 (App Router) · Prisma · PostgreSQL · NextAuth (Google OAuth) · Stripe · Tailwind CSS · MuAPI portrait-stylist
+**Use cases:** Photo editing apps · AI selfie art · Profile picture generators · Social media content · Gift portraits · AI avatar creation · Personal branding · Dating profile photos
 
 ## 🌐 Project Details
 
