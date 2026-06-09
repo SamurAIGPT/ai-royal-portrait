@@ -31,6 +31,7 @@ const PORTRAIT_STYLES = [
 ];
 
 const config = {
+  appName: "Ai Royal Portrait",
   auth: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID,

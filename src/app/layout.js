@@ -1,5 +1,6 @@
 import "./globals.css";
-import { SessionProvider } from "./providers";
+import { Providers } from "./providers";
+import config from "@/lib/config";
 
 export const metadata = {
   title: "AI Royal Portrait — Transform Your Photo into Royalty",
@@ -14,11 +15,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const theme = config?.theme || "slate-indigo";
+
   return (
-    <html lang="en">
-      <body>
-        <SessionProvider>{children}</SessionProvider>
+    <html lang="en" data-theme={theme}>
+      <body className="bg-bg-page text-primary-text min-h-screen">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
+
