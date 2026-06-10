@@ -5,6 +5,14 @@
 **Tech stack:** Next.js 14 (App Router) · Prisma · PostgreSQL · NextAuth (Google OAuth) · Stripe · Tailwind CSS · MuAPI portrait-stylist
 **Use cases:** Photo editing apps · AI selfie art · Profile picture generators · Social media content · Gift portraits · AI avatar creation · Personal branding · Dating profile photos
 
+<p align="center">
+  <a href="https://github.com/Anil-matcha/awesome-generative-ai-apps">
+    <img src="https://img.shields.io/badge/Part%20of-Awesome%20Generative%20AI%20Apps-FFD700?style=for-the-badge&logo=github&logoColor=black" alt="Awesome Generative AI Apps">
+  </a>
+</p>
+
+> 🎨 **[Explore 50+ more open-source AI apps →](https://github.com/Anil-matcha/awesome-generative-ai-apps)**
+
 ## 🌐 Project Details
 
 **GitHub Repository:** [github.com/SamurAIGPT/ai-royal-portrait](https://github.com/SamurAIGPT/ai-royal-portrait)
