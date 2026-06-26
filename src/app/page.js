@@ -2,7 +2,6 @@
 
 import { useSession, signIn } from "next-auth/react";
 import { useState, useEffect, useRef, useCallback } from "react";
-import Navbar from "@/components/Navbar";
 import {
   FaCrown,
   FaUpload,
@@ -245,9 +244,8 @@ export default function WorkspacePage() {
 
   
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col">
-      <Navbar />
-      <main className="flex-1 flex flex-col md:flex-row md:overflow-hidden overflow-y-auto max-w-7xl w-full mx-auto px-4 py-4 gap-4">
+    <div className="flex-1 flex flex-col lg:min-h-0 min-h-0">
+      <main className="flex-1 flex flex-col md:flex-row md:overflow-hidden overflow-y-auto max-w-7xl w-full mx-auto px-4 py-4 gap-4 lg:min-h-0 min-h-0">
         {/* ─────────────── LEFT PANEL ─────────────── */}
         <div className="w-full md:w-[400px] shrink-0 flex flex-col gap-4 md:overflow-y-auto overflow-visible pb-4">
 

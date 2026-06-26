@@ -2,7 +2,6 @@
 
 import { useSession, signIn } from "next-auth/react";
 import { useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
 import {
   FaImages,
   FaCrown,
@@ -54,8 +53,7 @@ export default function GalleryPage() {
 
   if (authStatus === "unauthenticated") {
     return (
-      <div className="min-h-screen bg-zinc-950 flex flex-col">
-        <Navbar />
+      <div className="flex-1 flex flex-col">
         <div className="flex-1 flex flex-col items-center justify-center px-4 text-center gap-6">
           <FaImages className="text-5xl text-zinc-700" />
           <div>
@@ -79,8 +77,7 @@ export default function GalleryPage() {
   const failed = creations.filter((c) => c.status === "failed");
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col">
-      <Navbar />
+    <div className="flex-1 flex flex-col bg-bg-page overflow-y-auto">
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
