@@ -13,6 +13,8 @@
 
 > 🎨 **[Explore 50+ more open-source AI apps →](https://github.com/Anil-matcha/awesome-generative-ai-apps)**
 
+https://github.com/user-attachments/assets/ecf82a70-5767-43b7-a371-bf115cc92908
+
 ## 🌐 Project Details
 
 **GitHub Repository:** [github.com/SamurAIGPT/ai-royal-portrait](https://github.com/SamurAIGPT/ai-royal-portrait)
