@@ -13,8 +13,11 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const requestId = searchParams.get("requestId");
 
+    const headerApiKey = req.headers.get("x-custom-api-key");
+    const customApiKey = headerApiKey || session.user.customApiKey || null;
+
     if (requestId) {
-      const statusData = await AIService.checkStatus(requestId);
+      const statusData = await AIService.checkStatus(requestId, customApiKey);
       return NextResponse.json(statusData);
     }
 
@@ -28,7 +31,7 @@ export async function GET(req) {
       creations.map(async (c) => {
         if (c.status === "processing" && c.requestId) {
           try {
-            await AIService.checkStatus(c.requestId);
+            await AIService.checkStatus(c.requestId, customApiKey);
             return (
               (await prisma.royalPortraitCreation.findUnique({
                 where: { id: c.id },
@@ -55,29 +58,41 @@ export async function POST(req) {
     const session = await getServerSession(authOptions);
     if (!session?.user) return new NextResponse("Unauthorized", { status: 401 });
 
-    const { inputImage, styleName, aspectRatio } = await req.json();
+    const body = await req.json();
+    const { inputImage, styleName, aspectRatio } = body;
 
     if (!inputImage) return new NextResponse("Missing inputImage", { status: 400 });
     if (!styleName) return new NextResponse("Missing styleName", { status: 400 });
 
-    const cost = AIService.getCreditCost();
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
-      select: { credits: true },
-    });
+    const headerApiKey = req.headers.get("x-custom-api-key");
+    const customApiKey = headerApiKey || body.customApiKey || session.user.customApiKey || null;
+    const isUsingCustomKey = Boolean(customApiKey && customApiKey.trim().length > 0);
 
-    if (!user || user.credits < cost) {
-      return new NextResponse(
-        `Insufficient credits. Required: ${cost}, balance: ${user?.credits ?? 0}`,
-        { status: 400 }
-      );
+    const cost = isUsingCustomKey ? 0 : AIService.getCreditCost();
+
+    if (!isUsingCustomKey && cost > 0) {
+      const user = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: { credits: true },
+      });
+
+      if (!user || user.credits < cost) {
+        return new NextResponse(
+          `Insufficient credits. Required: ${cost}, balance: ${user?.credits ?? 0}`,
+          { status: 400 }
+        );
+      }
     }
 
-    const creation = await AIService.generate(session.user.id, {
-      inputImage,
-      styleName,
-      aspectRatio: aspectRatio || "auto",
-    });
+    const creation = await AIService.generate(
+      session.user.id,
+      {
+        inputImage,
+        styleName,
+        aspectRatio: aspectRatio || "auto",
+      },
+      customApiKey
+    );
 
     return NextResponse.json(creation);
   } catch (error) {
