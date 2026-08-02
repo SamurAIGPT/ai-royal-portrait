@@ -15,6 +15,11 @@
 
 https://github.com/user-attachments/assets/ecf82a70-5767-43b7-a371-bf115cc92908
 
+## Related Projects
+
+- [MuAPI image-editing playground](https://muapi.ai/playground/gpt-image-2-image-to-image?utm_source=github&utm_medium=readme&utm_campaign=ai-royal-portrait) — turn portrait references into new styles and scenes
+- [MuAPI model catalog](https://muapi.ai/docs/models?utm_source=github&utm_medium=readme&utm_campaign=ai-royal-portrait) — compare image-generation models
+
 ## 🌐 Project Details
 
 **GitHub Repository:** [github.com/SamurAIGPT/ai-royal-portrait](https://github.com/SamurAIGPT/ai-royal-portrait)
